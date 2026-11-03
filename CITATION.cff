@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software or these results, please cite them as below."
+title: "AMR-LEARN and AMR-WATCH: offline teaching applications, validation package and analysis code for colony-image classification and antimicrobial-resistance trend detection"
+type: software
+license: MIT
+version: 1.0.0
+authors:
+  - given-names: "Muhammad Haseeb"
+    family-names: "Tariq"
+    email: "muhammadhaseebtariq19@gmail.com"
+    orcid: "https://orcid.org/0000-0002-4767-5430"
+    affiliation: "Department of Biochemistry, Mid Yorkshire Hospitals NHS Trust, Wakefield, United Kingdom"
+  - given-names: "Claire"
+    family-names: "Price"
+    affiliation: "Institute of Life Science, Swansea University Medical School, Swansea, United Kingdom"
+  - given-names: "Mariam"
+    family-names: "Ammoun"
+    affiliation: "Department of Blood Transfusion, Royal Marsden NHS Foundation Trust, London, United Kingdom"
+  - given-names: "Afreenish"
+    family-names: "Amir"
+    affiliation: "Department of Microbiology, National Institutes of Health, Islamabad, Pakistan"
+  - given-names: "Muhammad Muneeb"
+    family-names: "Tariq"
+    affiliation: "Department of Computer Sciences, Quaid-i-Azam University, Islamabad, Pakistan"
+abstract: "Research and teaching use only. Two single-file offline browser applications (AMR-LEARN 0.21.0, a colony-image teaching tool with a ResNet-18 model trained on the Jilin colony-image set, and AMR-WATCH 0.21.0-0.23.0, a surveillance teaching tool on synthetic data), the frozen software-validation package, and the scripts and result files behind two papers. No patient data. Not for clinical use."
+keywords:
+  - antimicrobial resistance
+  - colony images
+  - surveillance
+  - teaching
+  - software validation

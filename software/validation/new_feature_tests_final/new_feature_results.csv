@@ -1,0 +1,20 @@
+test_id,category,expected,observed,pass_fail
+V1_version,version,0.21.0,0.21.0,pass
+P1_answered_shows_panel,panel,context panel present when a species is suggested,answered=True; panel=True,pass
+P2_species_figures_match_table,panel,Salmonella: correct in 49 of 50 cases; right in 49 of 49 when named,"When a photograph really was Salmonella enterica subsp. enterica, the model named it correctly in 49 of 50 cases; its most frequent wrong answers were Burkholderia cepacia (1). When it named Salmonell",pass
+P2b_band_sentence,panel,95-99% band: 137 of 169 (81.1%),present,pass
+P3_not_exact_model_caveat,panel,states figures are not for this exact model file or the user's photographs,caveat present,pass
+T0_seven_options,explorer,no threshold + six thresholds,7,pass
+T1a_explorer_0.9,explorer,"47.8% answered, 87.7% correct at 0.9 (analysis table)","At a threshold of 90%, the model would have answered 47.8% of photographs (95% interval 40.3 to 55.6%) and been correct for 87.7% of those answers (95",pass
+T1_explorer_0.99,explorer,"21.9% answered, 95.2% correct at 0.99 (analysis table)","At a threshold of 99%, the model would have answered 21.9% of photographs (95% interval 15.8 to 28.9%) and been correct for 95.2% of those answers (95",pass
+T2_explorer_does_not_change_rule,explorer,application threshold still 0.9 after the explorer was moved to 0.99,0.9,pass
+E1_export_fields,export,"version, rule (0.9, three views) and outcome present",amr-run-record-1 v0.21.0 min_conf=0.9 abstained=False,pass
+E2_export_no_image_data,export,no image data in the file,569 bytes; image-like content False,pass
+P4_abstained_shows_no_species_context,panel,no species-specific figures when it cannot tell,abstained=True; species text=False,pass
+X1_no_page_errors_learn,robustness,no page errors,0,pass
+W1_default_reproduces_0.20.0,trends,"dashboard rule 32 found, 28 missed, 146 false alerts (as in 0.20.0)",32 / 28 / 146,pass
+W2_other_detectors_unchanged,trends,four 0.20.0 detector rows identical,True,pass
+W3_count_based_row_present,trends,"one count-based row labelled compared, not used","1 row(s); Count-based exact binomial, last 3 months (compared, not used)",pass
+W4_interval_columns,trends,sensitivity shown with a 95% interval,53.3% (41–65),pass
+W5_options_change_result,trends,"a larger, faster rise is found more often than the default in the same 30 datasets",found 25 of 30 (50% over 1 month) against 15 of 30 (default),pass
+X2_no_page_errors_watch,robustness,no page errors,0,pass

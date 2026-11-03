@@ -1,0 +1,22 @@
+{
+ "format": "amr-run-record-1",
+ "app_version": "0.21.0",
+ "edition": "learn",
+ "created": "2026-10-30T06:36:36.391Z",
+ "model": "Whole-plate model (research demo, runs offline)",
+ "model_input": "whole_plate",
+ "rule": {
+  "views": 3,
+  "all_views_must_agree": true,
+  "min_confidence": 0.9
+ },
+ "outcome": {
+  "abstained": false,
+  "reason": "",
+  "top_class": "ses",
+  "top_confidence": 0.9855601459843908,
+  "view_agreement": 1,
+  "max_confidence": 0.9855601459843908
+ },
+ "note": "Presumptive, research use only. No image data and no patient data are included."
+}

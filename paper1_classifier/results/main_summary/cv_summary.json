@@ -1,0 +1,245 @@
+{
+  "n_folds": 5,
+  "isolates_tested": 151,
+  "isolates_tested_more_than_once": 0,
+  "photos": 950,
+  "species": 19,
+  "accuracy_per_photo": 0.758,
+  "accuracy_per_photo_ci95_resampling_isolates": [
+    0.686,
+    0.827
+  ],
+  "isolate_weighted_accuracy": 0.762,
+  "isolate_weighted_ci95": [
+    0.703,
+    0.82
+  ],
+  "lazy_baseline": 0.053,
+  "chance": 0.053,
+  "by_species": [
+    {
+      "species": "aba",
+      "isolates": 11,
+      "photos": 50,
+      "accuracy": 0.72,
+      "isolate_weighted": 0.753
+    },
+    {
+      "species": "bce",
+      "isolates": 7,
+      "photos": 50,
+      "accuracy": 0.64,
+      "isolate_weighted": 0.857
+    },
+    {
+      "species": "bcp",
+      "isolates": 5,
+      "photos": 50,
+      "accuracy": 0.56,
+      "isolate_weighted": 0.708
+    },
+    {
+      "species": "cst",
+      "isolates": 6,
+      "photos": 50,
+      "accuracy": 0.8,
+      "isolate_weighted": 0.85
+    },
+    {
+      "species": "eca",
+      "isolates": 7,
+      "photos": 50,
+      "accuracy": 0.74,
+      "isolate_weighted": 0.553
+    },
+    {
+      "species": "eco",
+      "isolates": 9,
+      "photos": 50,
+      "accuracy": 0.8,
+      "isolate_weighted": 0.802
+    },
+    {
+      "species": "efa",
+      "isolates": 11,
+      "photos": 50,
+      "accuracy": 0.82,
+      "isolate_weighted": 0.764
+    },
+    {
+      "species": "enc",
+      "isolates": 8,
+      "photos": 50,
+      "accuracy": 0.72,
+      "isolate_weighted": 0.728
+    },
+    {
+      "species": "kpn",
+      "isolates": 14,
+      "photos": 50,
+      "accuracy": 0.84,
+      "isolate_weighted": 0.869
+    },
+    {
+      "species": "mmo",
+      "isolates": 6,
+      "photos": 50,
+      "accuracy": 0.84,
+      "isolate_weighted": 0.723
+    },
+    {
+      "species": "ppu",
+      "isolates": 4,
+      "photos": 50,
+      "accuracy": 0.56,
+      "isolate_weighted": 0.493
+    },
+    {
+      "species": "sag",
+      "isolates": 5,
+      "photos": 50,
+      "accuracy": 0.66,
+      "isolate_weighted": 0.587
+    },
+    {
+      "species": "sau",
+      "isolates": 10,
+      "photos": 50,
+      "accuracy": 0.62,
+      "isolate_weighted": 0.717
+    },
+    {
+      "species": "sep",
+      "isolates": 10,
+      "photos": 50,
+      "accuracy": 0.74,
+      "isolate_weighted": 0.795
+    },
+    {
+      "species": "ses",
+      "isolates": 8,
+      "photos": 50,
+      "accuracy": 0.98,
+      "isolate_weighted": 0.875
+    },
+    {
+      "species": "sma",
+      "isolates": 12,
+      "photos": 50,
+      "accuracy": 0.7,
+      "isolate_weighted": 0.668
+    },
+    {
+      "species": "spn",
+      "isolates": 5,
+      "photos": 50,
+      "accuracy": 0.82,
+      "isolate_weighted": 0.788
+    },
+    {
+      "species": "spy",
+      "isolates": 6,
+      "photos": 50,
+      "accuracy": 0.88,
+      "isolate_weighted": 0.786
+    },
+    {
+      "species": "stm",
+      "isolates": 7,
+      "photos": 50,
+      "accuracy": 0.96,
+      "isolate_weighted": 0.943
+    }
+  ],
+  "top_confusions": [
+    {
+      "true": "bce",
+      "predicted": "eco",
+      "count": 18
+    },
+    {
+      "true": "bcp",
+      "predicted": "sma",
+      "count": 16
+    },
+    {
+      "true": "ppu",
+      "predicted": "sag",
+      "count": 14
+    },
+    {
+      "true": "sag",
+      "predicted": "sau",
+      "count": 12
+    },
+    {
+      "true": "sep",
+      "predicted": "sau",
+      "count": 11
+    },
+    {
+      "true": "sma",
+      "predicted": "kpn",
+      "count": 9
+    },
+    {
+      "true": "cst",
+      "predicted": "sep",
+      "count": 8
+    },
+    {
+      "true": "efa",
+      "predicted": "eca",
+      "count": 8
+    },
+    {
+      "true": "spn",
+      "predicted": "spy",
+      "count": 8
+    },
+    {
+      "true": "sau",
+      "predicted": "sag",
+      "count": 7
+    }
+  ],
+  "confidence_thresholds": [
+    {
+      "min_confidence": 0,
+      "answered": 1.0,
+      "accuracy_when_answered": 0.758
+    },
+    {
+      "min_confidence": 0.5,
+      "answered": 0.875,
+      "accuracy_when_answered": 0.77
+    },
+    {
+      "min_confidence": 0.7,
+      "answered": 0.714,
+      "accuracy_when_answered": 0.822
+    },
+    {
+      "min_confidence": 0.8,
+      "answered": 0.614,
+      "accuracy_when_answered": 0.846
+    },
+    {
+      "min_confidence": 0.9,
+      "answered": 0.478,
+      "accuracy_when_answered": 0.877
+    },
+    {
+      "min_confidence": 0.95,
+      "answered": 0.397,
+      "accuracy_when_answered": 0.889
+    },
+    {
+      "min_confidence": 0.99,
+      "answered": 0.219,
+      "accuracy_when_answered": 0.952
+    }
+  ],
+  "errors_with_confidence_at_least_0.9": 56,
+  "errors": 230
+}

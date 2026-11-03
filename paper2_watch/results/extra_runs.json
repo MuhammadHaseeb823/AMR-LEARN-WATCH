@@ -1,0 +1,776 @@
+{
+ "indep_seeds": {
+  "MA": {
+   "found_end": 38,
+   "n": 60,
+   "sens_end_ci": [
+    0.517,
+    0.75
+   ],
+   "found_any": 38,
+   "sens_any_ci": [
+    0.517,
+    0.75
+   ],
+   "fa_end_mean": 7.6,
+   "fa_end_ci": [
+    7.192,
+    7.983
+   ],
+   "fa_any_mean": 19.32,
+   "fa_any_ci": [
+    18.791,
+    19.85
+   ],
+   "fa_end_median": 8.0,
+   "fa_end_iqr": [
+    6.0,
+    9.0
+   ],
+   "fa_end_range": [
+    2,
+    14
+   ]
+  },
+  "EWMA": {
+   "found_end": 57,
+   "n": 60,
+   "sens_end_ci": [
+    0.883,
+    1.0
+   ],
+   "found_any": 57,
+   "sens_any_ci": [
+    0.883,
+    1.0
+   ],
+   "fa_end_mean": 11.65,
+   "fa_end_ci": [
+    11.175,
+    12.092
+   ],
+   "fa_any_mean": 11.65,
+   "fa_any_ci": [
+    11.175,
+    12.092
+   ],
+   "fa_end_median": 12.0,
+   "fa_end_iqr": [
+    10.0,
+    13.25
+   ],
+   "fa_end_range": [
+    5,
+    22
+   ]
+  },
+  "CUSUM": {
+   "found_end": 59,
+   "n": 60,
+   "sens_end_ci": [
+    0.95,
+    1.0
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 16.82,
+   "fa_end_ci": [
+    16.308,
+    17.334
+   ],
+   "fa_any_mean": 16.82,
+   "fa_any_ci": [
+    16.308,
+    17.334
+   ],
+   "fa_end_median": 17.0,
+   "fa_end_iqr": [
+    15.0,
+    19.0
+   ],
+   "fa_end_range": [
+    10,
+    24
+   ]
+  },
+  "two": {
+   "found_end": 59,
+   "n": 60,
+   "sens_end_ci": [
+    0.95,
+    1.0
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 13.3,
+   "fa_end_ci": [
+    12.825,
+    13.783
+   ],
+   "fa_any_mean": 16.0,
+   "fa_any_ci": [
+    15.491,
+    16.492
+   ],
+   "fa_end_median": 13.0,
+   "fa_end_iqr": [
+    11.0,
+    15.0
+   ],
+   "fa_end_range": [
+    8,
+    22
+   ]
+  },
+  "two+min5": {
+   "found_end": 30,
+   "n": 60,
+   "sens_end_ci": [
+    0.383,
+    0.633
+   ],
+   "found_any": 49,
+   "sens_any_ci": [
+    0.717,
+    0.9
+   ],
+   "fa_end_mean": 3.47,
+   "fa_end_ci": [
+    3.133,
+    3.775
+   ],
+   "fa_any_mean": 7.81,
+   "fa_any_ci": [
+    7.408,
+    8.233
+   ],
+   "fa_end_median": 3.0,
+   "fa_end_iqr": [
+    2.0,
+    5.0
+   ],
+   "fa_end_range": [
+    0,
+    8
+   ]
+  },
+  "two+wilson": {
+   "found_end": 56,
+   "n": 60,
+   "sens_end_ci": [
+    0.867,
+    0.983
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 3.96,
+   "fa_end_ci": [
+    3.608,
+    4.3
+   ],
+   "fa_any_mean": 12.57,
+   "fa_any_ci": [
+    12.075,
+    13.025
+   ],
+   "fa_end_median": 4.0,
+   "fa_end_iqr": [
+    3.0,
+    5.0
+   ],
+   "fa_end_range": [
+    0,
+    10
+   ]
+  },
+  "dashboard": {
+   "found_end": 30,
+   "n": 60,
+   "sens_end_ci": [
+    0.367,
+    0.617
+   ],
+   "found_any": 49,
+   "sens_any_ci": [
+    0.717,
+    0.9
+   ],
+   "fa_end_mean": 1.26,
+   "fa_end_ci": [
+    1.083,
+    1.458
+   ],
+   "fa_any_mean": 5.88,
+   "fa_any_ci": [
+    5.483,
+    6.242
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    2.0
+   ],
+   "fa_end_range": [
+    0,
+    5
+   ]
+  },
+  "count": {
+   "found_end": 42,
+   "n": 60,
+   "sens_end_ci": [
+    0.583,
+    0.817
+   ],
+   "found_any": 55,
+   "sens_any_ci": [
+    0.833,
+    0.983
+   ],
+   "fa_end_mean": 0.87,
+   "fa_end_ci": [
+    0.7,
+    1.058
+   ],
+   "fa_any_mean": 4.92,
+   "fa_any_ci": [
+    4.558,
+    5.275
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    1.0
+   ],
+   "fa_end_range": [
+    0,
+    4
+   ]
+  }
+ },
+ "transient_outbreak": {
+  "MA": {
+   "found_end": 11,
+   "n": 60,
+   "sens_end_ci": [
+    0.083,
+    0.283
+   ],
+   "found_any": 44,
+   "sens_any_ci": [
+    0.617,
+    0.85
+   ],
+   "fa_end_mean": 7.51,
+   "fa_end_ci": [
+    7.117,
+    7.908
+   ],
+   "fa_any_mean": 18.73,
+   "fa_any_ci": [
+    18.166,
+    19.258
+   ],
+   "fa_end_median": 7.0,
+   "fa_end_iqr": [
+    6.0,
+    9.0
+   ],
+   "fa_end_range": [
+    3,
+    14
+   ]
+  },
+  "EWMA": {
+   "found_end": 53,
+   "n": 60,
+   "sens_end_ci": [
+    0.8,
+    0.95
+   ],
+   "found_any": 53,
+   "sens_any_ci": [
+    0.8,
+    0.95
+   ],
+   "fa_end_mean": 11.02,
+   "fa_end_ci": [
+    10.6,
+    11.442
+   ],
+   "fa_any_mean": 11.02,
+   "fa_any_ci": [
+    10.6,
+    11.442
+   ],
+   "fa_end_median": 11.0,
+   "fa_end_iqr": [
+    9.0,
+    12.0
+   ],
+   "fa_end_range": [
+    5,
+    21
+   ]
+  },
+  "CUSUM": {
+   "found_end": 58,
+   "n": 60,
+   "sens_end_ci": [
+    0.917,
+    1.0
+   ],
+   "found_any": 58,
+   "sens_any_ci": [
+    0.917,
+    1.0
+   ],
+   "fa_end_mean": 15.99,
+   "fa_end_ci": [
+    15.475,
+    16.475
+   ],
+   "fa_any_mean": 15.99,
+   "fa_any_ci": [
+    15.475,
+    16.475
+   ],
+   "fa_end_median": 16.0,
+   "fa_end_iqr": [
+    14.0,
+    18.0
+   ],
+   "fa_end_range": [
+    7,
+    24
+   ]
+  },
+  "two": {
+   "found_end": 53,
+   "n": 60,
+   "sens_end_ci": [
+    0.8,
+    0.967
+   ],
+   "found_any": 58,
+   "sens_any_ci": [
+    0.917,
+    1.0
+   ],
+   "fa_end_mean": 12.75,
+   "fa_end_ci": [
+    12.275,
+    13.217
+   ],
+   "fa_any_mean": 15.12,
+   "fa_any_ci": [
+    14.608,
+    15.633
+   ],
+   "fa_end_median": 13.0,
+   "fa_end_iqr": [
+    11.0,
+    14.25
+   ],
+   "fa_end_range": [
+    6,
+    23
+   ]
+  },
+  "two+min5": {
+   "found_end": 0,
+   "n": 60,
+   "sens_end_ci": [
+    0.0,
+    0.0
+   ],
+   "found_any": 53,
+   "sens_any_ci": [
+    0.8,
+    0.95
+   ],
+   "fa_end_mean": 3.12,
+   "fa_end_ci": [
+    2.8,
+    3.425
+   ],
+   "fa_any_mean": 6.96,
+   "fa_any_ci": [
+    6.542,
+    7.359
+   ],
+   "fa_end_median": 3.0,
+   "fa_end_iqr": [
+    2.0,
+    4.0
+   ],
+   "fa_end_range": [
+    0,
+    8
+   ]
+  },
+  "two+wilson": {
+   "found_end": 12,
+   "n": 60,
+   "sens_end_ci": [
+    0.117,
+    0.3
+   ],
+   "found_any": 58,
+   "sens_any_ci": [
+    0.917,
+    1.0
+   ],
+   "fa_end_mean": 3.83,
+   "fa_end_ci": [
+    3.508,
+    4.133
+   ],
+   "fa_any_mean": 12.07,
+   "fa_any_ci": [
+    11.583,
+    12.584
+   ],
+   "fa_end_median": 4.0,
+   "fa_end_iqr": [
+    2.0,
+    5.0
+   ],
+   "fa_end_range": [
+    0,
+    8
+   ]
+  },
+  "dashboard": {
+   "found_end": 0,
+   "n": 60,
+   "sens_end_ci": [
+    0.0,
+    0.0
+   ],
+   "found_any": 53,
+   "sens_any_ci": [
+    0.8,
+    0.967
+   ],
+   "fa_end_mean": 1.21,
+   "fa_end_ci": [
+    1.033,
+    1.392
+   ],
+   "fa_any_mean": 5.49,
+   "fa_any_ci": [
+    5.117,
+    5.858
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    2.0
+   ],
+   "fa_end_range": [
+    0,
+    4
+   ]
+  },
+  "count": {
+   "found_end": 0,
+   "n": 60,
+   "sens_end_ci": [
+    0.0,
+    0.0
+   ],
+   "found_any": 57,
+   "sens_any_ci": [
+    0.883,
+    1.0
+   ],
+   "fa_end_mean": 0.73,
+   "fa_end_ci": [
+    0.583,
+    0.892
+   ],
+   "fa_any_mean": 4.62,
+   "fa_any_ci": [
+    4.3,
+    4.942
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    1.0
+   ],
+   "fa_end_range": [
+    0,
+    5
+   ]
+  }
+ },
+ "default_seeds": {
+  "MA": {
+   "found_end": 41,
+   "n": 60,
+   "sens_end_ci": [
+    0.55,
+    0.8
+   ],
+   "found_any": 41,
+   "sens_any_ci": [
+    0.55,
+    0.8
+   ],
+   "fa_end_mean": 7.73,
+   "fa_end_ci": [
+    7.292,
+    8.175
+   ],
+   "fa_any_mean": 19.04,
+   "fa_any_ci": [
+    18.467,
+    19.625
+   ],
+   "fa_end_median": 8.0,
+   "fa_end_iqr": [
+    6.0,
+    9.0
+   ],
+   "fa_end_range": [
+    3,
+    14
+   ]
+  },
+  "EWMA": {
+   "found_end": 59,
+   "n": 60,
+   "sens_end_ci": [
+    0.95,
+    1.0
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 11.21,
+   "fa_end_ci": [
+    10.75,
+    11.675
+   ],
+   "fa_any_mean": 11.21,
+   "fa_any_ci": [
+    10.75,
+    11.675
+   ],
+   "fa_end_median": 11.0,
+   "fa_end_iqr": [
+    9.0,
+    13.0
+   ],
+   "fa_end_range": [
+    5,
+    21
+   ]
+  },
+  "CUSUM": {
+   "found_end": 60,
+   "n": 60,
+   "sens_end_ci": [
+    1.0,
+    1.0
+   ],
+   "found_any": 60,
+   "sens_any_ci": [
+    1.0,
+    1.0
+   ],
+   "fa_end_mean": 16.12,
+   "fa_end_ci": [
+    15.608,
+    16.65
+   ],
+   "fa_any_mean": 16.12,
+   "fa_any_ci": [
+    15.608,
+    16.65
+   ],
+   "fa_end_median": 16.0,
+   "fa_end_iqr": [
+    14.0,
+    18.0
+   ],
+   "fa_end_range": [
+    9,
+    24
+   ]
+  },
+  "two": {
+   "found_end": 60,
+   "n": 60,
+   "sens_end_ci": [
+    1.0,
+    1.0
+   ],
+   "found_any": 60,
+   "sens_any_ci": [
+    1.0,
+    1.0
+   ],
+   "fa_end_mean": 12.92,
+   "fa_end_ci": [
+    12.417,
+    13.442
+   ],
+   "fa_any_mean": 15.26,
+   "fa_any_ci": [
+    14.742,
+    15.817
+   ],
+   "fa_end_median": 13.0,
+   "fa_end_iqr": [
+    11.0,
+    14.25
+   ],
+   "fa_end_range": [
+    6,
+    23
+   ]
+  },
+  "two+min5": {
+   "found_end": 32,
+   "n": 60,
+   "sens_end_ci": [
+    0.417,
+    0.667
+   ],
+   "found_any": 51,
+   "sens_any_ci": [
+    0.767,
+    0.933
+   ],
+   "fa_end_mean": 3.15,
+   "fa_end_ci": [
+    2.875,
+    3.45
+   ],
+   "fa_any_mean": 7.06,
+   "fa_any_ci": [
+    6.666,
+    7.45
+   ],
+   "fa_end_median": 3.0,
+   "fa_end_iqr": [
+    2.0,
+    4.0
+   ],
+   "fa_end_range": [
+    0,
+    8
+   ]
+  },
+  "two+wilson": {
+   "found_end": 57,
+   "n": 60,
+   "sens_end_ci": [
+    0.883,
+    1.0
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 3.87,
+   "fa_end_ci": [
+    3.533,
+    4.217
+   ],
+   "fa_any_mean": 12.27,
+   "fa_any_ci": [
+    11.758,
+    12.808
+   ],
+   "fa_end_median": 4.0,
+   "fa_end_iqr": [
+    2.0,
+    5.0
+   ],
+   "fa_end_range": [
+    0,
+    9
+   ]
+  },
+  "dashboard": {
+   "found_end": 32,
+   "n": 60,
+   "sens_end_ci": [
+    0.4,
+    0.667
+   ],
+   "found_any": 51,
+   "sens_any_ci": [
+    0.767,
+    0.933
+   ],
+   "fa_end_mean": 1.22,
+   "fa_end_ci": [
+    1.033,
+    1.408
+   ],
+   "fa_any_mean": 5.66,
+   "fa_any_ci": [
+    5.292,
+    6.017
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    2.0
+   ],
+   "fa_end_range": [
+    0,
+    4
+   ]
+  },
+  "count": {
+   "found_end": 48,
+   "n": 60,
+   "sens_end_ci": [
+    0.7,
+    0.9
+   ],
+   "found_any": 59,
+   "sens_any_ci": [
+    0.95,
+    1.0
+   ],
+   "fa_end_mean": 0.77,
+   "fa_end_ci": [
+    0.6,
+    0.925
+   ],
+   "fa_any_mean": 5.07,
+   "fa_any_ci": [
+    4.7,
+    5.433
+   ],
+   "fa_end_median": 1.0,
+   "fa_end_iqr": [
+    0.0,
+    1.0
+   ],
+   "fa_end_range": [
+    0,
+    5
+   ]
+  }
+ }
+}

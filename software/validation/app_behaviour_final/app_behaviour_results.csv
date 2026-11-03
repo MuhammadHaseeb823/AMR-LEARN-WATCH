@@ -1,0 +1,20 @@
+test_id,category,expected,observed,pass_fail,notes
+R1_all_agree_high,decision_rule,answer,answer,pass,species name shown: True
+R1_all_agree_high_display,display,name of class 3 (Corynebacterium striatum) shown,shown=True,pass,
+R2_agree_mean_below_threshold,decision_rule,abstain,abstain,pass,
+R3_agree_mean_just_above,decision_rule,answer,answer,pass,species name shown: True
+R3_agree_mean_just_above_display,display,name of class 3 (Corynebacterium striatum) shown,shown=True,pass,
+R4_views_disagree_each_high,decision_rule,abstain,abstain,pass,
+R5_agree_conf_differs_mean_above,decision_rule,answer,answer,pass,species name shown: True
+R5_agree_conf_differs_mean_above_display,display,name of class 3 (Corynebacterium striatum) shown,shown=True,pass,
+R6_agree_one_view_low_mean_below,decision_rule,abstain,abstain,pass,
+R7_nan_output,decision_rule,no species answer,no answer,pass,"Cannot tell. The three views of the photo (as taken, flipped left-right, flipped top-bottom) did not"
+N1_no_external_requests_during_classification,network,no http(s) request from upload to answer,0 external requests: [],pass,
+N2_works_offline,network,classification completes with the network off,completed,pass,
+S1_no_image_data_in_browser_storage,storage,no image data stored,localStorage keys ['amrIntelligenceSession_v1'] ; sessionStorage [] ; cookies '' ; indexedDB [] ; image data in: [],pass,keys and sizes only; the page may store review records only if the user saves a confirmation
+P1_same_output_after_reload,repeatability,identical probabilities,max difference 0.0,pass,
+F1_no_stale_answer_after_invalid_file,recovery,previous answer cleared and run button disabled,run disabled=True; output starts: 'New photo loaded. Any earlier model answer was cleared. If the photo passes the ',pass,
+F2_clear_message_for_invalid_file,recovery,visible message that the file could not be analysed,"This file could not be analysed. The file is not a readable image (it may be corrupt, incomplete or not an ima",pass,
+F3_valid_after_invalid_works,recovery,answer or abstention shown,"Cannot tell. The averaged top answer had 62% confidence, bel",pass,
+D1_double_click_safe,robustness,"exactly one result, no page error",1 result(s); new page errors 0,pass,
+M1_model_missing_no_prediction,robustness,no prediction offered; clear message,"run disabled=True; status: 'No image model file was found. Keep amr_image_model.js in the same folder as this page, or'",pass,

@@ -1,0 +1,227 @@
+--- AMR-WATCH-0.21.0.html	2026-11-01 21:16:33.035994000 +0000
++++ AMR-WATCH-0.23.0.html	2026-11-01 22:04:59.989792841 +0000
+@@ -322,11 +322,12 @@
+   <div class="ov-head"><h1>Trends</h1><p class="ov-meta">Resistance by organism, antibiotic, ward and month, with drill-down from an alert. <strong>Synthetic counts only; no real data.</strong> <span id="trMeta"></span></p></div>
+   <div class="card trbar"><div class="grid-2"><div><label for="trScenario">Scenario</label><select id="trScenario"><option value="planted">One planted rise and one decoy</option><option value="outbreak">Short outbreak that is controlled</option><option value="testing">Change in testing method</option><option value="none">No planted rise (any alert is false)</option></select></div>
+     <div><label for="trSlider">Data up to month <strong id="trMonth"></strong></label><input type="range" id="trSlider" min="12" max="24" value="24" style="width:100%;"></div></div>
++    <div id="trScenInfo" class="small-note" style="margin-top:8px;"></div>
+     <div class="btn-row"><button id="trPlay" class="small">Replay from month 12</button><button id="trRegen" class="ghost small">Generate a new dataset</button><button id="trRevealBtn" class="ghost small">Reveal what was planted</button></div><div id="trReveal"></div></div>
+   <div class="trkpi" id="trKpi"></div>
+   <p class="trhead" id="trHead" aria-live="polite"></p>
+   <div class="callout safety"><strong>What this is.</strong> A teaching dashboard on a generated line list, showing how an infection prevention team might look at resistance trends. Counts are not de-duplicated by patient, which real data would need (rule DUP-001). Flags are statistical prompts to look, not findings.</div>
+-  <div class="card" style="margin-top:16px;"><h3>Alerts</h3><p class="small-note" style="margin-top:0;">A series is listed when two or more of the three detectors flag it and the last three months are above the baseline by the 95% interval (at least 5 resistant isolates). Series with fewer than 30 isolates in six months are marked as low numbers.</p><div style="overflow-x:auto;" id="trAlerts"></div><div id="trDrill"></div></div>
++  <div class="card" style="margin-top:16px;"><h3>Alerts</h3><p class="small-note" style="margin-top:0;">A series is listed when two or more of the three detectors flag it and the last three months are above the baseline by the 95% interval (at least 5 resistant isolates). Series with fewer than 30 isolates in six months are marked as low numbers (a warning of limited evidence, with the isolate count shown; the data are not invalid). EWMA and CUSUM stay flagged once their limit has been crossed; "signalling at end of window" shows how many detectors are above their limit now. Moving average and the dashboard's count and interval checks always describe the last months.</p><div style="overflow-x:auto;" id="trAlerts"></div><div id="trDrill"></div></div>
+   <div class="card" style="margin-top:16px;"><h3>Resistance by ward (last 6 months)</h3><div style="overflow-x:auto;" id="trHeat"></div></div>
+   <div class="card" style="margin-top:16px;"><h3>Explore a series</h3>
+     <div class="grid-2"><div><label for="trOrg">Organism</label><select id="trOrg"></select><label for="trDrug">Antibiotic</label><select id="trDrug"></select></div>
+@@ -337,6 +338,12 @@
+     <label for="trValPeak">Size of the planted rise (peak resistant share)</label><select id="trValPeak"><option value="0.15">15%</option><option value="0.30" selected>30%</option><option value="0.50">50%</option></select>
+     <label for="trValRamp">Speed of the rise</label><select id="trValRamp"><option value="1">Fast (1 month)</option><option value="4" selected>Medium (4 months)</option><option value="8">Slow (8 months)</option></select>
+     <div class="btn-row"><button id="trValBtn">Run planted-signal check</button></div><div id="trValOut" style="margin-top:12px;"></div></div>
++  <div class="callout" style="margin-top:16px;"><strong>Scope and limits of this page.</strong> The statistical evaluation in the accompanying paper uses only this Trends page. The laboratory interpretation, organism identification and colony-image pages are separate, educational modules: AST results are supplied by the user (the app does not replace laboratory testing), interpretation is rule-based and does not prove a resistance mechanism (for example a carbapenem-resistant result may arise from several mechanisms and needs confirmatory testing), identification profiles are teaching references, and the colony-image functions are classical image processing, not a trained model in this edition. Statistical flags are presumptive. Research and teaching use only; not a medical device.</div>
++  <div class="card" style="margin-top:16px;"><h3>Check the detectors on your own monthly counts</h3>
++    <p>Load a CSV with one row per month and series: <code>month</code> (YYYY-MM), <code>antibiotic</code> (any label; optional <code>version</code> column), <code>n</code> (isolates tested) and <code>r</code> (resistant). The detectors are run on every 24-month window (rows that are invalid, duplicated or inconsistent are rejected and listed). A known rise (+5, +10 or +20 percentage points) is also planted into every sixth real window to show how often each detector would find it. Nothing leaves your browser.</p>
++    <label for="trRealFile">CSV file</label><input type="file" id="trRealFile" accept=".csv,text/csv">
++    <div class="grid-2"><div><label for="trRealFrom">First month (optional, YYYY-MM)</label><input type="text" id="trRealFrom" placeholder="e.g. 2008-02"></div><div><label for="trRealTo">Last month (optional, YYYY-MM)</label><input type="text" id="trRealTo" placeholder="e.g. 2023-12"></div></div>
++    <div class="btn-row"><button id="trRealBtn">Run on this file</button></div><div id="trRealOut" style="margin-top:12px;"></div></div>
+ </section>
+ 
+ <section class="page" id="page-reliability">
+@@ -906,7 +913,7 @@
+ const EDITION=(document.querySelector('meta[name="amr-edition"]')||{}).content||"learn";
+ const EDS={learn:["overview","lab","stew","edu","reliability","evidence"],watch:["overview","trends","warn","stew","invest","lab","valid","reliability","evidence","reports"]};
+ const ED_PAGES=EDS[EDITION]||EDS.learn;
+-const APP={ version:"0.21.0", edition:EDITION, engine:"prototype 0.8", ruleset:"browser-rules-1", detector:"MA + EWMA + CUSUM", ref:"AWaRe (embedded)" };
++const APP={ version:"0.23.0", edition:EDITION, engine:"prototype 0.8", ruleset:"browser-rules-1", detector:"MA + EWMA + CUSUM", ref:"AWaRe (embedded)" };
+ function lsGet(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:v; }catch(e){ return d; } }
+ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+ 
+@@ -3397,9 +3404,12 @@
+ function trDetect(s){ const v=trPct(s); const {mean,std}=baselineStats(v); const a=[detectMA(v,mean),detectEWMA(v,mean,std),detectCUSUM(v,mean,std)]; const f=a.filter(x=>x.flagged);
+   const first=f.map(x=>x.detected).filter(x=>x!=null).sort((x,y)=>x-y)[0]; const win=s.slice(-6).reduce((t,x)=>t+x.n,0);
+   const l3=s.slice(-3).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0}), b6=s.slice(0,6).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0}), p0=b6.n?100*b6.r/b6.n:0, sup=l3.r>=5&&trWilson(l3.r,l3.n)[0]>p0;
+-  return {flags:a.map(x=>x.flagged),count:f.length,first:first==null?null:first,mean,win,low:win<TR_MINWIN,sup}; }
++  const nn=s.length, now=[a[0].flagged, nn>=2&&a[1].ewma[nn-1]>a[1].UCL&&a[1].ewma[nn-2]>a[1].UCL, nn>=1&&a[2].cusum[nn-1]>a[2].h];
++  return {flags:a.map(x=>x.flagged),count:f.length,first:first==null?null:first,mean,win,low:win<TR_MINWIN,sup,
++    now:now,nowCount:now.filter(Boolean).length,l3:l3,b6:b6,p0:p0,lo:trWilson(l3.r,l3.n)[0]}; }
++function trStateLabel(flag,now){ return now?"Signal present at end of window":(flag?"Crossed earlier, now back below limit":"No signal"); }
+ function trScan(data,minCount){ const out=[]; for(const o in TR_DEF) for(const d in TR_DEF[o].drugs) for(const w of ["All"].concat(TR_WARDS)){ const s=trAgg(data,o,d,w), x=trDetect(s); if(x.count>=minCount&&x.sup) out.push({org:o,drug:d,ward:w,series:s,...x}); } return out; }
+-function trLevel(a){ return a.low?"Low numbers — interpret with caution":(a.count===3?"Concordant signal (3 of 3 detectors)":"Concordant signal (2 of 3 detectors)"); }
++function trLevel(a){ return a.low?"Low numbers — interpret with caution ("+a.win+" isolates in the last 6 months; fewer than "+TR_MINWIN+")":(a.count===3?"Concordant signal (3 of 3 detectors)":"Concordant signal (2 of 3 detectors)"); }
+ function trChart(s,from){ const W=640,H=240,pl=34,pr=10,pt=10,pb=24, v=s.slice(from), N=v.length;
+   const ci=v.map(x=>trWilson(x.r,x.n)), mx=Math.max(20,...ci.map(c=>c[1]))*1.05, x=i=>pl+(N<2?0:i/(N-1))*(W-pl-pr), y=t=>H-pb-(t/mx)*(H-pt-pb);
+   const band=ci.map((c,i)=>`${x(i)},${y(c[1])}`).join(" ")+" "+ci.map((c,i)=>`${x(N-1-i)},${y(ci[N-1-i][0])}`).join(" ");
+@@ -3418,16 +3428,27 @@
+ function trFillDrugs(){ const o=document.getElementById("trOrg").value, s=document.getElementById("trDrug"); s.innerHTML=Object.keys(TR_DEF[o].drugs).map(d=>`<option value="${d}">${esc(TR_DEF[o].drugs[d][0])}</option>`).join(""); }
+ function trRenderSel(){ const S=trSelState(), s=trAgg(TR.data,S.o,S.d,S.w), from=Math.max(0,TR.upTo-S.p), sub=s.slice(from), tot=trCell(sub), last=trCell(s.slice(-1)), prev=trCell(s.slice(-4,-1));
+   const x=trDetect(s); document.getElementById("trSel").innerHTML=`<h3>${esc(TR_DEF[S.o].name)} – ${esc(TR_DEF[S.o].drugs[S.d][0])} · ${S.w==="All"?"all wards":esc(S.w)}</h3>${trChart(s,from)}
+-   <p class="small-note">Selected period: ${tot.k}/${tot.n} isolates resistant (${tot.p==null?"–":tot.p.toFixed(1)}%, 95% interval ${tot.ci[0].toFixed(0)}–${tot.ci[1].toFixed(0)}%). Latest month: ${last.k}/${last.n}${last.n<TR_LOWN?" (low numbers)":""}; previous three months: ${prev.k}/${prev.n}. Detectors flagged: ${x.count} of 3 (moving average ${x.flags[0]?"yes":"no"}, EWMA ${x.flags[1]?"yes":"no"}, CUSUM ${x.flags[2]?"yes":"no"}).</p>`; }
++   <p class="small-note">Selected period: ${tot.k}/${tot.n} isolates resistant (${tot.p==null?"–":tot.p.toFixed(1)}%, 95% interval ${tot.ci[0].toFixed(0)}–${tot.ci[1].toFixed(0)}%). Latest month: ${last.k}/${last.n}${last.n<TR_LOWN?" (low numbers)":""}; previous three months: ${prev.k}/${prev.n}. Detectors (ever signalled): ${x.count} of 3 (moving average ${x.flags[0]?"yes":"no"}, EWMA ${x.flags[1]?"yes":"no"}, CUSUM ${x.flags[2]?"yes":"no"}) have signalled at some point; ${x.nowCount} of 3 signal at the end of the window.</p>`; }
+ function trAlertsHtml(){ const A=TR.alerts; if(!A.length) return `<p>No series was flagged by two or more detectors.</p>`;
+-  return `<table class="dom"><thead><tr><th>Organism – antibiotic</th><th>Ward</th><th>Detectors</th><th>First flagged</th><th>Isolates (6 mo)</th><th>Status</th><th></th></tr></thead><tbody>`+A.map((a,i)=>`<tr><td>${esc(TR_DEF[a.org].name)} – ${esc(TR_DEF[a.org].drugs[a.drug][0])}</td><td>${a.ward}${a.isNew?" <span class=\"pill info\">new</span>":""}</td><td class="num">${a.count}/3</td><td class="num">${a.first==null?"–":"M"+(a.first+1)}</td><td class="num">${a.win}</td><td><span class="pill ${a.low?"warn":"info"}">${esc(trLevel(a))}</span></td><td><button class="small ghost" data-tralert="${i}">Drill down</button></td></tr>`).join("")+`</tbody></table>
++  return `<table class="dom"><thead><tr><th>Organism – antibiotic</th><th>Ward</th><th>Detectors that ever signalled</th><th>Signalling at end of window</th><th>First flagged</th><th>Isolates (6 mo)</th><th>Status</th><th></th></tr></thead><tbody>`+A.map((a,i)=>`<tr><td>${esc(TR_DEF[a.org].name)} – ${esc(TR_DEF[a.org].drugs[a.drug][0])}</td><td>${a.ward}${a.isNew?" <span class=\"pill info\">new</span>":""}</td><td class="num">${a.count}/3</td><td class="num">${a.nowCount}/3</td><td class="num">${a.first==null?"–":"M"+(a.first+1)}</td><td class="num">${a.win}</td><td><span class="pill ${a.low?"warn":"info"}">${esc(trLevel(a))}</span></td><td><button class="small ghost" data-tralert="${i}">Drill down</button></td></tr>`).join("")+`</tbody></table>
+   <p class="small-note">${TR_N>0?`${Object.keys(TR_DEF).reduce((t,o)=>t+Object.keys(TR_DEF[o].drugs).length,0)*6} series were scanned, so some false alerts are expected by chance. A flag is a prompt to look, not a finding.`:""}</p>`; }
++function trWhyHtml(a){ const nm=["Moving average","EWMA","CUSUM"], ok=b=>b?"<span class=\"pill ok\">met</span>":"<span class=\"pill warn\">not met</span>";
++  const rows=nm.map((n,i)=>`<tr><td>${n}</td><td>${a.flags[i]?"yes":"no"}</td><td>${a.now[i]?"yes":"no"}</td><td>${esc(trStateLabel(a.flags[i],a.now[i]))}</td></tr>`).join("");
++  const l3=a.l3, b6=a.b6;
++  return `<h4>Why this series is on the dashboard</h4><table class="dom"><thead><tr><th>Detector</th><th>Ever signalled</th><th>Signalling at end of window</th><th>State</th></tr></thead><tbody>${rows}</tbody></table>
++  <table class="dom" style="margin-top:8px;"><thead><tr><th>Dashboard condition</th><th>Value</th><th></th></tr></thead><tbody>
++  <tr><td>At least 2 of 3 detectors have signalled</td><td class="num">${a.count} of 3</td><td>${ok(a.count>=2)}</td></tr>
++  <tr><td>At least 5 resistant isolates in the last 3 months (pooled)</td><td class="num">${l3.r} resistant of ${l3.n} tested</td><td>${ok(l3.r>=5)}</td></tr>
++  <tr><td>Lower 95% Wilson limit of the last 3 months' pooled proportion is above the pooled proportion of months 1–6</td><td class="num">last 3 months ${l3.n?(100*l3.r/l3.n).toFixed(1):"–"}% (lower limit ${a.lo.toFixed(1)}%); months 1–6: ${b6.r}/${b6.n} = ${a.p0.toFixed(1)}%</td><td>${ok(a.lo>a.p0)}</td></tr></tbody></table>
++  <p class="small-note">Counts are pooled over the months stated. A month with no isolates counts as 0 isolates (and 0% in the monthly chart). If months 1–6 contain no isolates the baseline proportion is taken as 0%. The interval is recalculated for each series and each month shown. ${a.low?"Low numbers: only "+a.win+" isolates in the last 6 months (warning threshold "+TR_MINWIN+").":""}</p>${trMatchHtml(a)}`; }
++function trMatchHtml(a){ if(!TR.revealed||!TR.truth) return ""; const hit=TR.truth.filter(t=>t.org===a.org&&t.drug===a.drug&&(a.ward==="All"||t.ward===a.ward||t.kind==="testing"));
++  return hit.length?`<p class="small-note"><strong>Known truth (revealed):</strong> this series includes a planted ${hit.map(t=>t.kind==="planted"?"real rise":t.kind==="decoy"?"decoy":t.kind==="outbreak"?"short outbreak":"testing change").join(" and ")}.</p>`:`<p class="small-note"><strong>Known truth (revealed):</strong> nothing was planted in this series, so this alert is a false alert in this synthetic dataset.</p>`; }
+ function trDrill(i){ const a=TR.alerts[i]; if(!a) return; TR.sel=i; const s=a.series, tot=trCell(s.slice(-6)), base=trCell(s.slice(0,6));
+   let rows=""; if(a.ward==="All"){ rows=TR_WARDS.map(w=>{ const ws=trAgg(TR.data,a.org,a.drug,w), c=trCell(ws.slice(-6)), b=trCell(ws.slice(0,6)); return `<tr><td>${w}</td><td class="num">${b.k}/${b.n}</td><td class="num">${c.k}/${c.n}</td><td class="num">${c.p==null?"–":c.p.toFixed(0)+"%"} (${c.ci[0].toFixed(0)}–${c.ci[1].toFixed(0)})</td></tr>`; }).join(""); }
+   const steps=["Confirm identification and susceptibility for the resistant isolates with the reference method.","Check for duplicate isolates from the same patient (the counts here are not de-duplicated, see DUP-001).","Check whether the rise sits in one ward, one specimen type or one testing batch.","Look for a change in testing method, panel or breakpoints around the first flagged month.","Wait for further months: persistence supports a real rise; reversion to baseline refutes it.","Typing or molecular testing is needed to say whether isolates are related; counts cannot."];
+   const el=document.getElementById("trDrill"); el.innerHTML=`<div class="card" style="margin-top:12px;"><h3>${esc(TR_DEF[a.org].name)} – ${esc(TR_DEF[a.org].drugs[a.drug][0])} · ${a.ward==="All"?"all wards":esc(a.ward)}</h3>${trChart(s,0)}
+   <p>${evidenceTag("stat")} <span class="pill ${a.low?"warn":"info"}">${esc(trLevel(a))}</span></p>
+-  <p class="small-note">Baseline (months 1–6): ${base.k}/${base.n} resistant (${base.p==null?"–":base.p.toFixed(1)}%). Latest six months: ${tot.k}/${tot.n} (${tot.p==null?"–":tot.p.toFixed(1)}%, 95% interval ${tot.ci[0].toFixed(0)}–${tot.ci[1].toFixed(0)}%). Detectors flagged from month ${a.first==null?"–":a.first+1}. Rule SURV-001. Presumptive statistical signal: mechanism, spread and cause are not established.</p>
++  <p class="small-note">Baseline (months 1–6): ${base.k}/${base.n} resistant (${base.p==null?"–":base.p.toFixed(1)}%). Latest six months: ${tot.k}/${tot.n} (${tot.p==null?"–":tot.p.toFixed(1)}%, 95% interval ${tot.ci[0].toFixed(0)}–${tot.ci[1].toFixed(0)}%). Detectors flagged from month ${a.first==null?"–":a.first+1}. Rule SURV-001. Presumptive statistical signal: mechanism, spread and cause are not established.</p>${trWhyHtml(a)}
+   ${rows?`<h4>By ward</h4><table class="dom"><thead><tr><th>Ward</th><th>Months 1–6</th><th>Last 6 months</th><th>% (95% interval)</th></tr></thead><tbody>${rows}</tbody></table>`:""}
+   <h4>What would confirm or dismiss it</h4><ul style="font-size:0.88rem;margin:4px 0 8px 18px;padding:0;">${steps.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+   <div class="btn-row"><button class="small" data-trinv="${i}">Open an investigation</button><button class="small ghost" data-trbrief="${i}">Download alert brief (.txt)</button></div></div>`; el.scrollIntoView&&el.scrollIntoView({block:"nearest"}); }
+@@ -3448,6 +3469,7 @@
+   return `<tr><td>${k}</td><td class="num">${r.tp}</td><td class="num">${r.fn}</td><td class="num">${r.fp}</td><td class="num">${(r.fp/V.sets).toFixed(1)}</td><td class="num">${fi(r.tp,r.tp+r.fn)}</td><td class="num">${fi(r.tpl,r.tp+r.fn)}</td><td class="num">${fi(r.tp,r.tp+r.fp)}</td><td class="num">${acc.toFixed(1)}%</td><td class="num">${md==null?"–":md+" mo"}</td></tr>`; }).join("");
+   const o=V.opt||{}, pk=Math.round(100*(o.peak||0.30)), rp=o.ramp||4;
+   return `<p>${evidenceTag("stat")}</p><p>${V.sets} synthetic datasets (half with one planted rise, half with none); each has ${(V.pos+V.neg)/V.sets} organism–antibiotic–ward series, so ${V.pos} series contain a planted rise and ${V.neg} do not. The planted rise takes the resistant share from its 3% baseline to ${pk}% over ${rp} month${rp===1?"":"s"}, starting in month 17. Wards with few isolates are included on purpose.</p>
++  <div class="callout"><strong>Design.</strong> Datasets per scenario: ${V.sets/2} planted and ${V.sets/2} unplanted. Series per dataset: ${(V.pos+V.neg)/V.sets}. Months per series: 24. Baseline: months 1 to 6. Evaluation: the end of month 24, with the rules in Supplementary S1 (baseline SD floored at 0.5 points; moving average 40% above baseline; EWMA weight 0.3 with limit mean + 2.7 SD × √(0.3/1.7) in two consecutive months; one-sided CUSUM with slack 0.5 SD and limit 4 SD; dashboard rule = 2 of 3 plus at least 5 resistant isolates in the last 3 months and a Wilson lower limit above baseline; count test: at least 3 resistant and exact one-sided probability below 0.01 with baseline at least 1%). Seeds: dataset i uses 7000 + 31i with a planted rise and 7000 + 31i + 1 without, so every run is reproducible and smaller runs are subsets of larger ones. Three different denominators are used and are not interchangeable: <em>dataset-level detection</em> (was the one planted series flagged: found out of ${V.sets/2} planted datasets), <em>series-level alerting</em> (false alerts are flagged series among the ${V.neg+V.pos-V.sets/2} series without a planted rise; the per-dataset figure divides by all ${V.sets} datasets) and <em>window-level alerting</em> (not used on this page; see the real-data panel below, where the unit is a 24-month window).</div>
+   <table><thead><tr><th>Detector</th><th>Planted rises found</th><th>Missed</th><th>False alerts</th><th>False alerts per dataset</th><th>Sensitivity (95% interval)</th><th>Found, first signal at month 17 or later</th><th>Share of alerts that were real (95% interval)</th><th>Accuracy</th><th>Median delay</th></tr></thead><tbody>${rows}</tbody></table>
+   <div class="callout safety">The "truth" is what the generator planted, so this measures how the detectors cope with this simulated noise, not how they would perform on real laboratory data. Intervals are Wilson intervals that treat series as independent, so they are rough guides, and they are wide when only a few rises are planted. Accuracy is high here mainly because most series have no rise; read missed and false alerts instead. Delay is counted from the planted onset (month 17). EWMA and CUSUM fire if they cross their limit at any month of the 24, so a chance crossing before month 17 can make a series count as found; the column "first signal at month 17 or later" counts only series whose first crossing came after the rise began (the moving average, the interval check and the count-based test judge the last three months, so they are not changed). The count-based row is a comparison; the dashboard does not use it, and its 1% level was chosen in advance and not tuned.</div>`; }
+ 
+@@ -3462,13 +3484,82 @@
+   document.getElementById("trHead").textContent=!TR.alerts.length?"At month "+U+", no series is flagged by two or more detectors.":"At month "+U+", "+TR.alerts.length+" series "+(TR.alerts.length===1?"is":"are")+" flagged"+(strong.length?"; the strongest is "+TR_DEF[strong[0].org].name+" – "+TR_DEF[strong[0].org].drugs[strong[0].drug][0]+" ("+(strong[0].ward==="All"?"all wards":strong[0].ward)+").":", all with low numbers.")+" A flag is a prompt to look, not a finding.";
+   document.getElementById("trMonth").textContent=U; document.getElementById("trSlider").value=U;
+   document.getElementById("trHeat").innerHTML=trHeat(TR.data); document.getElementById("trAlerts").innerHTML=trAlertsHtml(); document.getElementById("trDrill").innerHTML=""; TR.sel=null; trRenderSel(); }
+-function trRun(){ const seed=((typeof sessionSeed==="number"?sessionSeed:1)+TR.seedOff)>>>0, g=trGen(seed,TR.scenario); TR.data=g.data; TR.truth=g.truth; TR.upTo=TR.scenario==="outbreak"?18:24; trStop(); document.getElementById("trReveal").innerHTML="";
++/* ===================== Real monthly counts check (0.22.0) ===================== */
++function trRealFlags(s){ const v=s.map(x=>x.n?100*x.r/x.n:0), b=baselineStats(v), det=[detectMA(v,b.mean),detectEWMA(v,b.mean,b.std),detectCUSUM(v,b.mean,b.std)];
++  const l3=s.slice(-3).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0}), b6=s.slice(0,6).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0});
++  const two=det.filter(x=>x.flagged).length>=2, sup=l3.r>=5&&l3.n>0&&trWilson(l3.r,l3.n)[0]>(b6.n?100*b6.r/b6.n:0);
++  const p0=Math.max(0.01,b6.n?b6.r/b6.n:0.01), cnt=l3.r>=3&&trBinomTail(l3.r,l3.n,p0)<0.01;
++  return {MA:det[0].flagged,EWMA:det[1].flagged,CUSUM:det[2].flagged,two:two,dashboard:two&&sup,count01:cnt}; }
++function trRealFlagsNow(s){ const v=s.map(x=>x.n?100*x.r/x.n:0), b=baselineStats(v), n=v.length, ma=detectMA(v,b.mean), ew=detectEWMA(v,b.mean,b.std), cu=detectCUSUM(v,b.mean,b.std);
++  const f=[ma.flagged, ew.ewma[n-1]>ew.UCL&&ew.ewma[n-2]>ew.UCL, cu.cusum[n-1]>cu.h];
++  const l3=s.slice(-3).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0}), b6=s.slice(0,6).reduce((t,x)=>({n:t.n+x.n,r:t.r+x.r}),{n:0,r:0});
++  const two=f.filter(Boolean).length>=2, sup=l3.r>=5&&l3.n>0&&trWilson(l3.r,l3.n)[0]>(b6.n?100*b6.r/b6.n:0);
++  const p0=Math.max(0.01,b6.n?b6.r/b6.n:0.01), cnt=l3.r>=3&&trBinomTail(l3.r,l3.n,p0)<0.01;
++  return {MA:f[0],EWMA:f[1],CUSUM:f[2],two:two,dashboard:two&&sup,count01:cnt}; }
++const TR_REAL_KEYS=["MA","EWMA","CUSUM","two","dashboard","count01"];
++const TR_REAL_NAMES={MA:"Moving average",EWMA:"EWMA",CUSUM:"CUSUM",two:"2 of 3 agree",dashboard:"Dashboard rule",count01:"Count test (exploratory)"};
++function trRealMonths(a,b){ const out=[]; let [y,m]=a.split("-").map(Number); const [yb,mb]=b.split("-").map(Number); while(y<yb||(y===yb&&m<=mb)){ out.push(y+"-"+String(m).padStart(2,"0")); m++; if(m>12){m=1;y++;} } return out; }
++function trRealParse(text){ const L=text.replace(/\r/g,"").trim().split("\n").map(l=>l.split(",").map(x=>x.trim())); const H=L.shift().map(x=>x.toLowerCase()); const ix=n=>H.indexOf(n);
++  if(ix("month")<0||ix("n")<0||ix("r")<0) throw new Error("The file needs the columns month, n and r (and optionally antibiotic, organism and version).");
++  const S={}, iv=ix("version"), ia=ix("antibiotic"), io=ix("organism"), rej=[]; let rows=0;
++  L.forEach((r,li)=>{ const line=li+2; if(r.length===1&&r[0]==="") return; rows++; const why=t=>{ rej.push({line:line,reason:t}); };
++    if(r.length<H.length){ why("too few columns"); return; }
++    const m=r[ix("month")], ns=r[ix("n")], ks=r[ix("r")], n=+ns, k=+ks;
++    if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(m)){ why("month is not YYYY-MM ("+m+")"); return; }
++    if(ia>=0&&r[ia]===""){ why("missing antibiotic identifier"); return; } if(io>=0&&r[io]===""){ why("missing organism identifier"); return; }
++    if(ns===""||ks===""||!isFinite(n)||!isFinite(k)){ why("n or r is not a number"); return; }
++    if(n<0||k<0){ why("negative count"); return; } if(k>n){ why("resistant count greater than tested ("+k+" > "+n+")"); return; }
++    if(Math.floor(n)!==n||Math.floor(k)!==k){ why("counts must be whole numbers"); return; }
++    const key=(iv>=0?r[iv]+" | ":"")+(io>=0?r[io]+" | ":"")+(ia>=0?r[ia]:"series");
++    if(S[key]&&S[key][m]){ why("duplicate row for "+key+" "+m+" (first one kept)"); return; }
++    (S[key]=S[key]||{})[m]={n:n,r:k}; });
++  return {S:S,rejected:rej,rows:rows,bad:rej.length}; }
++function trRejText(P){ return P.rejected.length?" "+P.rejected.length+" of "+P.rows+" rows were rejected. First "+Math.min(10,P.rejected.length)+": "+P.rejected.slice(0,10).map(x=>"line "+x.line+" ("+x.reason+")").join("; ")+".":""; }
++function trRealRun(text,from,to,seed){ const P=trRealParse(text), keys=Object.keys(P.S); if(!keys.length) throw new Error("No usable rows found."+trRejText(P));
++  let all=[]; keys.forEach(k=>{ all=all.concat(Object.keys(P.S[k])); }); all.sort(); const M=trRealMonths(from||all[0],to||all[all.length-1]);
++  if(M.length<24) throw new Error("At least 24 months are needed (found "+M.length+"), so no complete 24-month window exists."+trRejText(P));
++  const rng=mulberry32(seed||20261101), binom=(n,p)=>{ let k=0; for(let i=0;i<n;i++) if(rng()<p) k++; return k; }; const out=[];
++  for(const key of keys){ const mo=P.S[key], ser=M.map(m=>mo[m]||{n:0,r:0}); const missing=M.filter(m=>!mo[m]).length, emptyBase=0, med=ser.map(x=>x.n).sort((a,b)=>a-b)[Math.floor(ser.length/2)];
++    const win=[], winN=[]; let noBase=0; for(let e=24;e<=ser.length;e++){ const w=ser.slice(e-24,e); if(!w.slice(0,6).some(x=>x.n>0)) noBase++; win.push(trRealFlags(w)); winN.push(trRealFlagsNow(w)); }
++    const share=Object.fromEntries(TR_REAL_KEYS.map(k=>[k,win.filter(w=>w[k]).length/win.length])), shareNow=Object.fromEntries(TR_REAL_KEYS.map(k=>[k,winN.filter(w=>w[k]).length/winN.length])); const planted={}, plantedNow={};
++    for(const delta of [5,10,20]){ let nw=0; const hit=Object.fromEntries(TR_REAL_KEYS.map(k=>[k,0])), hitN=Object.fromEntries(TR_REAL_KEYS.map(k=>[k,0]));
++      for(let e=24;e<=ser.length;e+=6){ const w=ser.slice(e-24,e); const t=w.slice(0,6).reduce((a,x)=>({n:a.n+x.n,r:a.r+x.r}),{n:0,r:0}), p6=t.n?t.r/t.n:0;
++        const w2=w.map((x,i)=>{ if(i<16) return x; const ramp=Math.min(1,(i-15)/4), target=Math.min(0.95,p6+delta/100*ramp), p=x.n?x.r/x.n:0; if(target<=p) return x; const q=(target-p)/(1-p); return {n:x.n,r:x.r+binom(x.n-x.r,q)}; });
++        const f1=trRealFlags(w2), f2=trRealFlagsNow(w2); nw++; TR_REAL_KEYS.forEach(k=>{ if(f1[k]) hit[k]++; if(f2[k]) hitN[k]++; }); }
++      planted[delta]={windows:nw,sens:Object.fromEntries(TR_REAL_KEYS.map(k=>[k,hit[k]/nw]))}; plantedNow[delta]={windows:nw,sens:Object.fromEntries(TR_REAL_KEYS.map(k=>[k,hitN[k]/nw]))}; }
++    out.push({key:key,months:M.length,missing:missing,noBase:noBase,median:med,windows:win.length,share:share,shareNow:shareNow,planted:planted,plantedNow:plantedNow}); }
++  return {series:out,bad:P.bad,rejected:P.rejected,rows:P.rows,first:M[0],last:M[M.length-1]}; }
++function trRealHtml(R){ const pc=x=>(100*x).toFixed(0)+"%"; const head=TR_REAL_KEYS.map(k=>"<th>"+TR_REAL_NAMES[k]+"</th>").join("");
++  const T1=(key)=>R.series.map(s=>`<tr><td>${esc(s.key)}</td><td class="num">${s.median}</td><td class="num">${s.windows}</td>${TR_REAL_KEYS.map(k=>`<td class="num">${pc(s[key][k])}</td>`).join("")}</tr>`).join("");
++  const T2=(key)=>R.series.map(s=>[5,10,20].map(d=>`<tr><td>${esc(s.key)}</td><td class="num">+${d}</td><td class="num">${s[key][d].windows}</td>${TR_REAL_KEYS.map(k=>`<td class="num">${pc(s[key][d].sens[k])}</td>`).join("")}</tr>`).join("")).join("");
++  const rej=R.rejected.length?`<div class="callout"><strong>${R.rejected.length} of ${R.rows} rows were rejected</strong> and not used. First ${Math.min(10,R.rejected.length)}: ${R.rejected.slice(0,10).map(x=>"line "+x.line+" ("+esc(x.reason)+")").join("; ")}.</div>`:`<p class="small-note">All ${R.rows} rows were valid.</p>`;
++  const notes=R.series.filter(s=>s.missing||s.noBase).map(s=>`${esc(s.key)}: ${s.missing} month(s) with no row (treated as zero isolates)${s.noBase?"; "+s.noBase+" window(s) had no isolates in the baseline months 1–6":""}`).join("; ");
++  return `<p>${evidenceTag("stat")}</p><p>${R.series.length} series, ${R.first} to ${R.last}. Every 24-month window is run, moving forward one month at a time; each window uses its own first six months as baseline and its last three months as the current period. Windows overlap and are not independent.</p>${rej}${notes?`<p class="small-note">${notes}.</p>`:""}
++  <h4>Share of 24-month windows in which each detector alerted: state at the end of the window (all detectors on the same footing)</h4>
++  <table><thead><tr><th>Series</th><th>Median isolates per month</th><th>Windows</th>${head}</tr></thead><tbody>${T1("shareNow")}</tbody></table>
++  <h4>Same, as shipped (EWMA and CUSUM count as alerting if they crossed their limit at any month of the window)</h4>
++  <table><thead><tr><th>Series</th><th>Median isolates per month</th><th>Windows</th>${head}</tr></thead><tbody>${T1("share")}</tbody></table>
++  <h4>Share of windows flagged after a known rise was planted into real counts (state at end of window)</h4>
++  <table><thead><tr><th>Series</th><th>Rise (percentage points)</th><th>Windows</th>${head}</tr></thead><tbody>${T2("plantedNow")}</tbody></table>
++  <h4>Same, as shipped</h4>
++  <table><thead><tr><th>Series</th><th>Rise (percentage points)</th><th>Windows</th>${head}</tr></thead><tbody>${T2("planted")}</tbody></table>
++  <div class="callout"><strong>How a rise is planted.</strong> Total isolates per month are kept. In every sixth window (counting from the first complete window) a target proportion is set for window months 17 to 24: it ramps up over four months to the pooled months 1–6 proportion plus the chosen number of percentage points (capped at 95%). Where a month's observed proportion is below its target, extra resistant isolates are drawn at random (binomial) from that month's susceptible isolates so that the expected proportion reaches the target; resistant counts are never reduced. One seeded random generator (seed 20261101) is used for all series in order, and every detector sees the same modified windows.</div>
++  <div class="callout safety">Real laboratory data has no list of true resistance events here, so an alert share is not a false-positive rate: it only shows how often each rule fires, mostly when resistance has drifted away from the first six months of the window. The planted rises are artificial. The dashboard rule's minimum-count requirement and the exploratory count test were not tuned for your data. Use only for teaching and research, never for patient care or outbreak decisions.</div>`; }
++
++function trScenInfo(){ const T={
++  planted:"Purpose: test whether detectors find a persistent rise without raising many false alerts. Planted: K. pneumoniae with meropenem in the ICU rises from a 3% baseline to 30% over 4 months, starting in month 17. A decoy is also planted: one other series (E. coli with ciprofloxacin on the surgical ward, S. aureus with cefoxitin on the paediatric ward, or E. faecium with vancomycin in the ICU) has one month between months 10 and 19 with 3 or 4 isolates, most of them resistant. An alert in any other series is a false alert.",
++  outbreak:"Purpose: show what a short outbreak that ends looks like to each detector. Planted: K. pneumoniae with meropenem on the surgical ward is 35% resistant in months 15 to 18 and then returns to its 3% baseline. Data are shown to month 18 first; move the slider to month 24 to see which detectors have stopped signalling. Alerts elsewhere are false alerts.",
++  testing:"Purpose: show how a change in testing method can look like a resistance rise. Planted: E. coli with ceftriaxone, in every ward, has its resistant proportion multiplied by about 2.4 from month 14. This is not a real rise in resistance. Alerts elsewhere are false alerts.",
++  none:"Purpose: measure false alerts. Nothing is planted, so every alert is a false alert relative to the synthetic ground truth."}; const e=document.getElementById("trScenInfo"); if(e) e.textContent=T[TR.scenario]; }
++function trRun(){ const seed=((typeof sessionSeed==="number"?sessionSeed:1)+TR.seedOff)>>>0, g=trGen(seed,TR.scenario); TR.data=g.data; TR.truth=g.truth; TR.upTo=TR.scenario==="outbreak"?18:24; trStop(); TR.revealed=false; document.getElementById("trReveal").innerHTML=""; trScenInfo();
+   const sl=document.getElementById("trSlider"); sl.min=12; sl.max=TR_N; trRender();
+   document.getElementById("trMeta").textContent="Synthetic data · seed "+seed+" · scenario: "+({planted:"one planted rise and one decoy",none:"no planted rise",outbreak:"short outbreak, controlled",testing:"change in testing method"})[TR.scenario]; }
+ function trStop(){ if(TR.timer){ clearInterval(TR.timer); TR.timer=null; } const b=document.getElementById("trPlay"); if(b) b.textContent="Replay from month 12"; }
+ function trPlay(){ if(TR.timer){ trStop(); return; } TR.upTo=12; trRender(); document.getElementById("trPlay").textContent="Pause"; TR.timer=setInterval(()=>{ if(TR.upTo>=TR_N){ trStop(); return; } TR.upTo++; trRender(); },900); }
+ function trTruthHtml(){ if(!TR.truth||!TR.truth.length) return "<p>Nothing was planted in this dataset. Any alert above is a false alert.</p>"; const nm=t=>TR_DEF[t.org].name+" – "+TR_DEF[t.org].drugs[t.drug][0];
+   return "<ul style='margin:4px 0 4px 18px;padding:0;font-size:0.9rem;'>"+TR.truth.map(t=>t.kind==="planted"?`<li>Planted real rise: ${esc(nm(t))}, ${esc(t.ward)}, from month ${t.onset+1}.</li>`:t.kind==="decoy"?`<li>Planted decoy: one month (M${t.month+1}) with very few isolates: ${esc(nm(t))}, ${esc(t.ward)}.</li>`:t.kind==="outbreak"?`<li>Planted short outbreak: ${esc(nm(t))}, ${esc(t.ward)}, months ${t.from+1} to ${t.to+1}, then back to baseline.</li>`:`<li>Planted testing change: ${esc(nm(t))} rises in every ward from month ${t.from+1}. It models a change in testing method, not a real rise in resistance.</li>`).join("")+"</ul>"; }
++function trTallyHtml(){ const A=TR.alerts||[]; if(!A.length) return "<p>No series is flagged at this month.</p>"; const m=A.filter(a=>(TR.truth||[]).some(t=>t.org===a.org&&t.drug===a.drug&&(a.ward==="All"||t.ward===a.ward||t.kind==="testing"))).length;
++  return `<p><strong>At month ${TR.upTo}:</strong> ${A.length} series flagged; ${m} include something planted (a real rise, decoy, outbreak or testing change) and ${A.length-m} do not, so those are false alerts in this dataset. Revealing the truth does not change any detector calculation.</p>`; }
+ function trBrief(i){ const a=TR.alerts[i]; if(!a) return; const s=a.series, tot=trCell(s.slice(-6)), base=trCell(s.slice(0,6)); const nm=TR_DEF[a.org].name+" – "+TR_DEF[a.org].drugs[a.drug][0]+" ("+(a.ward==="All"?"all wards":a.ward)+")";
+   const t=["AMR-WATCH — alert brief (synthetic data, teaching use only)","Series: "+nm,"Data up to month "+TR.upTo+" of "+TR_N,"Status: "+trLevel(a)+" (rule SURV-001)","","What was seen","- Baseline (months 1–6): "+base.k+"/"+base.n+" resistant ("+(base.p==null?"–":base.p.toFixed(1))+"%)","- Latest six months: "+tot.k+"/"+tot.n+" ("+(tot.p==null?"–":tot.p.toFixed(1))+"%, 95% interval "+tot.ci[0].toFixed(0)+"–"+tot.ci[1].toFixed(0)+"%)","- Detectors flagged: "+a.count+" of 3, first at month "+(a.first==null?"–":a.first+1),"","What is uncertain","- Counts are not de-duplicated by patient (DUP-001).","- "+(a.low?"Fewer than "+TR_MINWIN+" isolates in six months (DQ-001).":"Numbers are adequate for a prompt, not for a conclusion.")+" "+Math.max(0,Object.keys(TR_DEF).reduce((t,o)=>t+Object.keys(TR_DEF[o].drugs).length,0)*6)+" series were scanned, so some false alerts are expected.","- Mechanism, spread and cause are not established.","","What to check next","- Confirm identification and susceptibility of the resistant isolates.","- Remove duplicates; check ward, specimen type and testing batch.","- Check for a change of method or breakpoints.","- Watch further months: persistence supports it, return to baseline refutes it.","- Typing or molecular testing is needed to say whether isolates are related."].join("\n");
+   const l=document.createElement("a"); l.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); l.download="alert-brief.txt"; document.body.appendChild(l); l.click(); l.remove(); pushAudit("Trends","Alert brief exported",nm,""); }
+@@ -3480,9 +3571,11 @@
+   document.getElementById("trSlider").addEventListener("input",e=>{ trStop(); TR.upTo=+e.target.value; trRender(); });
+   document.getElementById("trPlay").addEventListener("click",trPlay);
+   document.getElementById("trRegen").addEventListener("click",()=>{ TR.seedOff+=1; trRun(); pushAudit("Trends","Synthetic dataset regenerated","scenario="+TR.scenario,""); });
+-  document.getElementById("trRevealBtn").addEventListener("click",()=>{ document.getElementById("trReveal").innerHTML="<div class='callout'>"+trTruthHtml()+"</div>"; });
++  document.getElementById("trRevealBtn").addEventListener("click",()=>{ TR.revealed=true; document.getElementById("trReveal").innerHTML="<div class='callout'>"+trTruthHtml()+trTallyHtml()+"</div>"; });
+   document.getElementById("trValBtn").addEventListener("click",()=>{ const n=+document.getElementById("trValN").value; const opt={peak:+document.getElementById("trValPeak").value,ramp:+document.getElementById("trValRamp").value}; document.getElementById("trValOut").innerHTML=trValidateHtml(trValidate(n,opt)); pushAudit("Trends","Planted-signal validation",n*2+" datasets, peak "+opt.peak+", ramp "+opt.ramp,""); });
+   pg.addEventListener("click",e=>{ const t=e.target; if(!t.dataset) return; if(t.dataset.tralert!==undefined) trDrill(+t.dataset.tralert); if(t.dataset.trbrief!==undefined) trBrief(+t.dataset.trbrief); if(t.dataset.trinv!==undefined){ const a=TR.alerts[+t.dataset.trinv]; if(a) invOpen(trSig(a)); } });
++  document.getElementById("trRealBtn").addEventListener("click",()=>{ const fi=document.getElementById("trRealFile").files[0], out=document.getElementById("trRealOut"); if(!fi){ out.innerHTML="<div class='callout'>Choose a CSV file first.</div>"; return; }
++    const rd=new FileReader(); rd.onload=()=>{ try{ const R=trRealRun(String(rd.result),document.getElementById("trRealFrom").value.trim(),document.getElementById("trRealTo").value.trim()); out.innerHTML=trRealHtml(R); pushAudit("Trends","Real monthly counts check",R.series.length+" series, "+R.first+" to "+R.last,""); }catch(err){ out.innerHTML="<div class='callout'>"+esc(err.message)+"</div>"; } }; rd.readAsText(fi); });
+   trRun(); })();
+ function trAskText(q){ if(!TR.alerts||!TR.data) return null; const A=TR.alerts.filter(a=>!a.low&&a.ward!=="All").slice(0,3).concat(TR.alerts.filter(a=>!a.low&&a.ward==="All").slice(0,2)); const nm=a=>TR_DEF[a.org].name+" – "+TR_DEF[a.org].drugs[a.drug][0]+" ("+(a.ward==="All"?"all wards":a.ward)+")";
+   const cite=" <span class='mono-s'>["+ruleLink("SURV-001")+"]</span>"; if(!TR.alerts.length) return "<p>The trends dataset has no flagged series.</p>";
+@@ -4865,6 +4958,37 @@
+   check("A dominant background colour is NOT falsely reported as confluent growth when real discrete colonies are present",
+     dotsDet.growth === null);
+ 
++  /* ---- surveillance algorithm, input-validation and reproducibility checks (0.23.0) ---- */
++  { const near=(a,b,e)=>Math.abs(a-b)<(e||1e-6);
++    const b1=baselineStats([2,2,2,2,2,2,9,9]); check("Baseline: constant months give mean 2 and the SD floor of 0.5", near(b1.mean,2)&&near(b1.std,0.5));
++    const b2=baselineStats([1,2,3,4,5,6,50]); check("Baseline: mean 3.5 and population SD (divide by 6) of months 1 to 6", near(b2.mean,3.5)&&near(b2.std,Math.sqrt(35/12),1e-9));
++    const flat=Array(24).fill(5), up=Array(12).fill(5).concat(Array(12).fill(15)), down=Array(12).fill(15).concat(Array(12).fill(5));
++    check("No detector flags a constant series", !detectMA(flat,5).flagged&&!detectEWMA(flat,5,0.5).flagged&&!detectCUSUM(flat,5,0.5).flagged);
++    check("A sustained upward step is flagged by the moving average, EWMA and CUSUM", detectMA(up,5).flagged&&detectEWMA(up,5,0.5).flagged&&detectCUSUM(up,5,0.5).flagged);
++    check("CUSUM is one-sided: a downward step is not flagged", !detectCUSUM(down,15,0.5).flagged);
++    check("Moving average flags exactly at 40% above baseline, not below", detectMA(Array(24).fill(7),5).flagged&&!detectMA(Array(24).fill(6.9),5).flagged);
++    check("Wilson interval for 5 of 10 is about 23.7% to 76.3%", near(trWilson(5,10)[0],23.66,0.05)&&near(trWilson(5,10)[1],76.34,0.05));
++    check("Exact binomial tail: P(X>=3) for n=10, p=0.1 is 0.0702", near(trBinomTail(3,10,0.1),0.07019,1e-4));
++    const stable=Array(24).fill(0).map(()=>({n:20,r:2}));
++    check("A stable series is not flagged by the dashboard conditions", !trDetect(stable).sup&&trDetect(stable).count<2);
++    const risen=stable.map((x,i)=>i>=20?{n:20,r:10}:x), dR=trDetect(risen);
++    check("A clear sustained rise meets all dashboard conditions (2 of 3, 5 resistant, interval above baseline)", dR.count>=2&&dR.l3.r>=5&&dR.sup&&dR.nowCount>=2);
++    const few=stable.map((x,i)=>i>=21?{n:4,r:1}:x); check("Fewer than 5 resistant isolates in the last 3 months cannot meet the dashboard rule", !trDetect(few).sup);
++    const g1=JSON.stringify(trGen(7000,"planted").data), g2=JSON.stringify(trGen(7000,"planted").data), g3=JSON.stringify(trGen(7031,"planted").data);
++    check("Synthetic data are reproducible: the same seed gives identical data, another seed does not", g1===g2&&g1!==g3);
++    const gn=trGen(7001,"none"); check("The no-planted-rise scenario has no planted truth", gn.truth.length===0);
++    const gp=trGen(7000,"planted"); check("The planted scenario records one planted rise and one decoy", gp.truth.filter(t=>t.kind==="planted").length===1&&gp.truth.filter(t=>t.kind==="decoy").length===1);
++    const V=trValidate(10,{peak:0.30,ramp:4}); const vd=V.R["2 of 3 agree + interval check (used on the dashboard)"];
++    check("Planted-signal check reproduces its recorded result on 10 datasets per scenario (dashboard rule finds 4 of 10 planted rises)", vd.tp===4&&V.sets===20);
++    const csv="month,antibiotic,n,r\n2020-01,A,10,3\n2020-01,A,10,4\n2020-13,A,10,3\n2020-02,A,5,9\n2020-03,A,-1,0\n2020-04,,10,2\n2020-05,A,x,1\n2020-06,A,10,2";
++    const P=trRealParse(csv); const rs=P.rejected.map(x=>x.reason).join("|");
++    check("CSV check: duplicate, bad month, r>n, negative, missing identifier and non-numeric rows are each rejected with a reason", P.rejected.length===6&&/duplicate/.test(rs)&&/YYYY-MM/.test(rs)&&/greater than/.test(rs)&&/negative/.test(rs)&&/missing antibiotic/.test(rs)&&/not a number/.test(rs)&&Object.keys(P.S.A).length===2);
++    let thrown=false; try{ trRealParse("a,b\n1,2"); }catch(e){ thrown=true; } check("CSV check: a file without month, n and r columns is refused", thrown);
++    let thrown2=false; try{ trRealRun("month,antibiotic,n,r\n2020-01,A,10,3\n2020-02,A,10,3","","",1); }catch(e){ thrown2=/24 months/.test(e.message); } check("CSV check: fewer than 24 months is refused (no complete window)", thrown2);
++    const rows=["month,antibiotic,n,r"]; for(let i=0;i<30;i++){ const y=2018+Math.floor(i/12), m=String(i%12+1).padStart(2,"0"); rows.push(y+"-"+m+",A,100,"+(10+(i%3))); }
++    const R1=trRealRun(rows.join("\n"),"","",20261101), R2=trRealRun(rows.join("\n"),"","",20261101);
++    check("Real-counts panel is reproducible (same file and seed give identical output) and runs 7 windows on 30 months", JSON.stringify(R1.series)===JSON.stringify(R2.series)&&R1.series[0].windows===7);
++  }
+   return results;
+ }
+ 

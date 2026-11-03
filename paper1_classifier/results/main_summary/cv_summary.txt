@@ -1,0 +1,38 @@
+5 folds, 151 isolates, 950 photographs, 19 species
+isolates tested more than once: 0 (must be 0)
+accuracy per photograph 0.758  95% interval (resampling isolates) [0.686, 0.827]
+isolate-weighted accuracy 0.762  95% interval [0.703, 0.82]
+chance 0.053  lazy baseline 0.053
+
+species  isolates  photos  accuracy  isolate-weighted
+aba           11      50     0.720             0.753
+bce            7      50     0.640             0.857
+bcp            5      50     0.560             0.708
+cst            6      50     0.800             0.850
+eca            7      50     0.740             0.553
+eco            9      50     0.800             0.802
+efa           11      50     0.820             0.764
+enc            8      50     0.720             0.728
+kpn           14      50     0.840             0.869
+mmo            6      50     0.840             0.723
+ppu            4      50     0.560             0.493
+sag            5      50     0.660             0.587
+sau           10      50     0.620             0.717
+sep           10      50     0.740             0.795
+ses            8      50     0.980             0.875
+sma           12      50     0.700             0.668
+spn            5      50     0.820             0.788
+spy            6      50     0.880             0.786
+stm            7      50     0.960             0.943
+
+confidence threshold -> answered, accuracy when answered
+0: 1.0, 0.758
+0.5: 0.875, 0.77
+0.7: 0.714, 0.822
+0.8: 0.614, 0.846
+0.9: 0.478, 0.877
+0.95: 0.397, 0.889
+0.99: 0.219, 0.952
+
+errors 230, of which confidence >= 0.9: 56
+top confusions: bce->eco 18, bcp->sma 16, ppu->sag 14, sag->sau 12, sep->sau 11, sma->kpn 9, cst->sep 8, efa->eca 8, spn->spy 8, sau->sag 7

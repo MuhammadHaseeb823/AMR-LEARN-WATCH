@@ -1,0 +1,65 @@
+{
+ "meta": {
+  "app_file": "AMR-LEARN-0.21.0.html",
+  "app_sha256": "a360645f254e5e157d7166c9338ee1c870553682d92e7f57ca3acf8c5f35f648",
+  "suite_manifest_sha256": "2e021e10d605063f5746168e6b282e0ffb59ef6c31983c478c8b7e8bf451c27c",
+  "reference_sha256": "83bf2d1792aee29fea692b79da84b5410793a38819fdf0bbed1e0743b4fbc22b",
+  "page_and_model_load_s": 4.46,
+  "app_version": "0.21.0",
+  "class_order_matches_reference": true,
+  "classes_in_app": 19,
+  "classes_in_reference": 19,
+  "repeatability_runs": 5,
+  "repeatability_max_abs_diff_between_runs": 0.0,
+  "latency_seconds": {
+   "runs": 5,
+   "median": 6.496,
+   "q1": 6.394,
+   "q3": 6.838,
+   "first_run": 6.496
+  },
+  "page_errors": []
+ },
+ "summary": {
+  "A": {
+   "abstained": 12,
+   "answered": 43,
+   "rejected_by_quality_check": 2,
+   "files": 57
+  },
+  "B": {
+   "abstained": 40,
+   "answered": 68,
+   "rejected_by_quality_check": 6,
+   "files": 114
+  },
+  "C": {
+   "rejected_by_quality_check": 3,
+   "rejected_with_message": 5,
+   "files": 8
+  },
+  "D": {
+   "abstained": 2,
+   "rejected_by_quality_check": 2,
+   "files": 4
+  },
+  "agreement": {
+   "compared": 165,
+   "top_class_all_views_agree": 165,
+   "max_abs_diff_over_all": 0.010740286052455028,
+   "median_of_max_abs_diff": 0.00021682804316636162,
+   "answer_rule_agrees": 165
+  },
+  "invalid_inputs_handled_without_page_error": 8,
+  "supported_files_not_answered": [
+   "A_spn_2.jpg",
+   "A_spy_0.jpg",
+   "B_spy_0_big.jpg",
+   "B_spy_0_grey.jpg",
+   "B_spy_0_png.png",
+   "B_spy_0_q35.jpg",
+   "B_spy_0_rgba.png",
+   "B_spy_0_rot90.jpg"
+  ]
+ }
+}

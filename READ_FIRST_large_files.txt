@@ -1,0 +1,5 @@
+TWO LARGE FILES ARE SENT SEPARATELY (chat size limit). Put them in this exact place after unzipping:
+ 1) software/apps/amr_image_model_crop.js        <- from zip "2_optional_crop_model.zip"
+ 2) software/validation/suite_files.zip          <- from zip "3_optional_validation_suite.zip"
+Then every file is in place and SHA256SUMS.txt will check cleanly (sha256sum -c SHA256SUMS.txt).
+Delete this note before uploading to GitHub, or leave it in - it does no harm.

@@ -1,0 +1,641 @@
+{
+ "60_0.30_4": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 30% over 4 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "3 mo"
+   ],
+   [
+    "EWMA",
+    "59",
+    "1",
+    "1345",
+    "11.2",
+    "98.3% (91–100)",
+    "4.2% (3–5)",
+    "72.0%",
+    "3 mo"
+   ],
+   [
+    "CUSUM",
+    "60",
+    "0",
+    "1934",
+    "16.1",
+    "100.0% (94–100)",
+    "3.0% (2–4)",
+    "59.7%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "60",
+    "0",
+    "1550",
+    "12.9",
+    "100.0% (94–100)",
+    "3.7% (3–5)",
+    "67.7%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "32",
+    "28",
+    "146",
+    "1.2",
+    "53.3% (41–65)",
+    "18.0% (13–24)",
+    "96.4%",
+    "2 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "48",
+    "12",
+    "92",
+    "0.8",
+    "80.0% (68–88)",
+    "34.3% (27–42)",
+    "97.8%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.15_1": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 15% over 1 month, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "36",
+    "24",
+    "928",
+    "7.7",
+    "60.0% (47–71)",
+    "3.7% (3–5)",
+    "80.2%",
+    "1 mo"
+   ],
+   [
+    "EWMA",
+    "46",
+    "14",
+    "1345",
+    "11.2",
+    "76.7% (65–86)",
+    "3.3% (2–4)",
+    "71.7%",
+    "2 mo"
+   ],
+   [
+    "CUSUM",
+    "54",
+    "6",
+    "1934",
+    "16.1",
+    "90.0% (80–95)",
+    "2.7% (2–4)",
+    "59.6%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "54",
+    "6",
+    "1550",
+    "12.9",
+    "90.0% (80–95)",
+    "3.4% (3–4)",
+    "67.6%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "5",
+    "55",
+    "146",
+    "1.2",
+    "8.3% (4–18)",
+    "3.3% (1–8)",
+    "95.8%",
+    "7 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "19",
+    "41",
+    "92",
+    "0.8",
+    "31.7% (21–44)",
+    "17.1% (11–25)",
+    "97.2%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.15_4": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 15% over 4 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "36",
+    "24",
+    "928",
+    "7.7",
+    "60.0% (47–71)",
+    "3.7% (3–5)",
+    "80.2%",
+    "5 mo"
+   ],
+   [
+    "EWMA",
+    "39",
+    "21",
+    "1345",
+    "11.2",
+    "65.0% (52–76)",
+    "2.8% (2–4)",
+    "71.5%",
+    "4 mo"
+   ],
+   [
+    "CUSUM",
+    "49",
+    "11",
+    "1934",
+    "16.1",
+    "81.7% (70–89)",
+    "2.5% (2–3)",
+    "59.5%",
+    "3 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "49",
+    "11",
+    "1550",
+    "12.9",
+    "81.7% (70–89)",
+    "3.1% (2–4)",
+    "67.5%",
+    "3 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "5",
+    "55",
+    "146",
+    "1.2",
+    "8.3% (4–18)",
+    "3.3% (1–8)",
+    "95.8%",
+    "7 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "19",
+    "41",
+    "92",
+    "0.8",
+    "31.7% (21–44)",
+    "17.1% (11–25)",
+    "97.2%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.15_8": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 15% over 8 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "32",
+    "28",
+    "928",
+    "7.7",
+    "53.3% (41–65)",
+    "3.3% (2–5)",
+    "80.1%",
+    "5 mo"
+   ],
+   [
+    "EWMA",
+    "36",
+    "24",
+    "1345",
+    "11.2",
+    "60.0% (47–71)",
+    "2.6% (2–4)",
+    "71.5%",
+    "3 mo"
+   ],
+   [
+    "CUSUM",
+    "48",
+    "12",
+    "1934",
+    "16.1",
+    "80.0% (68–88)",
+    "2.4% (2–3)",
+    "59.5%",
+    "4 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "48",
+    "12",
+    "1550",
+    "12.9",
+    "80.0% (68–88)",
+    "3.0% (2–4)",
+    "67.5%",
+    "4 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "4",
+    "56",
+    "146",
+    "1.2",
+    "6.7% (3–16)",
+    "2.7% (1–7)",
+    "95.8%",
+    "7 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "16",
+    "44",
+    "92",
+    "0.8",
+    "26.7% (17–39)",
+    "14.8% (9–23)",
+    "97.2%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.30_1": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 30% over 1 month, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "2 mo"
+   ],
+   [
+    "EWMA",
+    "60",
+    "0",
+    "1345",
+    "11.2",
+    "100.0% (94–100)",
+    "4.3% (3–5)",
+    "72.0%",
+    "2 mo"
+   ],
+   [
+    "CUSUM",
+    "60",
+    "0",
+    "1934",
+    "16.1",
+    "100.0% (94–100)",
+    "3.0% (2–4)",
+    "59.7%",
+    "1 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "60",
+    "0",
+    "1550",
+    "12.9",
+    "100.0% (94–100)",
+    "3.7% (3–5)",
+    "67.7%",
+    "1 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "32",
+    "28",
+    "146",
+    "1.2",
+    "53.3% (41–65)",
+    "18.0% (13–24)",
+    "96.4%",
+    "1 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "48",
+    "12",
+    "92",
+    "0.8",
+    "80.0% (68–88)",
+    "34.3% (27–42)",
+    "97.8%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.30_8": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 30% over 8 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "5 mo"
+   ],
+   [
+    "EWMA",
+    "49",
+    "11",
+    "1345",
+    "11.2",
+    "81.7% (70–89)",
+    "3.5% (3–5)",
+    "71.8%",
+    "4 mo"
+   ],
+   [
+    "CUSUM",
+    "56",
+    "4",
+    "1934",
+    "16.1",
+    "93.3% (84–97)",
+    "2.8% (2–4)",
+    "59.6%",
+    "4 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "56",
+    "4",
+    "1550",
+    "12.9",
+    "93.3% (84–97)",
+    "3.5% (3–5)",
+    "67.6%",
+    "4 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "21",
+    "39",
+    "146",
+    "1.2",
+    "35.0% (24–48)",
+    "12.6% (8–18)",
+    "96.1%",
+    "3 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "42",
+    "18",
+    "92",
+    "0.8",
+    "70.0% (57–80)",
+    "31.3% (24–40)",
+    "97.7%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.50_1": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 50% over 1 month, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "2 mo"
+   ],
+   [
+    "EWMA",
+    "60",
+    "0",
+    "1345",
+    "11.2",
+    "100.0% (94–100)",
+    "4.3% (3–5)",
+    "72.0%",
+    "1 mo"
+   ],
+   [
+    "CUSUM",
+    "60",
+    "0",
+    "1934",
+    "16.1",
+    "100.0% (94–100)",
+    "3.0% (2–4)",
+    "59.7%",
+    "0 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "60",
+    "0",
+    "1550",
+    "12.9",
+    "100.0% (94–100)",
+    "3.7% (3–5)",
+    "67.7%",
+    "0 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "55",
+    "5",
+    "146",
+    "1.2",
+    "91.7% (82–96)",
+    "27.4% (22–34)",
+    "96.9%",
+    "0 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "59",
+    "1",
+    "92",
+    "0.8",
+    "98.3% (91–100)",
+    "39.1% (32–47)",
+    "98.1%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.50_4": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 50% over 4 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "3 mo"
+   ],
+   [
+    "EWMA",
+    "60",
+    "0",
+    "1345",
+    "11.2",
+    "100.0% (94–100)",
+    "4.3% (3–5)",
+    "72.0%",
+    "3 mo"
+   ],
+   [
+    "CUSUM",
+    "60",
+    "0",
+    "1934",
+    "16.1",
+    "100.0% (94–100)",
+    "3.0% (2–4)",
+    "59.7%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "60",
+    "0",
+    "1550",
+    "12.9",
+    "100.0% (94–100)",
+    "3.7% (3–5)",
+    "67.7%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "55",
+    "5",
+    "146",
+    "1.2",
+    "91.7% (82–96)",
+    "27.4% (22–34)",
+    "96.9%",
+    "2 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "59",
+    "1",
+    "92",
+    "0.8",
+    "98.3% (91–100)",
+    "39.1% (32–47)",
+    "98.1%",
+    "–"
+   ]
+  ]
+ },
+ "60_0.50_8": {
+  "intro": "120 synthetic datasets (half with one planted rise, half with none); each has 40 organism–antibiotic–ward series, so 60 series contain a planted rise and 4740 do not. The planted rise takes the resistant share from its 3% baseline to 50% over 8 months, starting in month 17. Wards with few isolates are included on purpose.",
+  "rows": [
+   [
+    "Moving average",
+    "41",
+    "19",
+    "928",
+    "7.7",
+    "68.3% (56–79)",
+    "4.2% (3–6)",
+    "80.3%",
+    "3 mo"
+   ],
+   [
+    "EWMA",
+    "60",
+    "0",
+    "1345",
+    "11.2",
+    "100.0% (94–100)",
+    "4.3% (3–5)",
+    "72.0%",
+    "3 mo"
+   ],
+   [
+    "CUSUM",
+    "60",
+    "0",
+    "1934",
+    "16.1",
+    "100.0% (94–100)",
+    "3.0% (2–4)",
+    "59.7%",
+    "2 mo"
+   ],
+   [
+    "2 of 3 agree",
+    "60",
+    "0",
+    "1550",
+    "12.9",
+    "100.0% (94–100)",
+    "3.7% (3–5)",
+    "67.7%",
+    "3 mo"
+   ],
+   [
+    "2 of 3 agree + interval check (used on the dashboard)",
+    "52",
+    "8",
+    "146",
+    "1.2",
+    "86.7% (76–93)",
+    "26.3% (21–33)",
+    "96.8%",
+    "3 mo"
+   ],
+   [
+    "Count-based exact binomial, last 3 months (compared, not used)",
+    "59",
+    "1",
+    "92",
+    "0.8",
+    "98.3% (91–100)",
+    "39.1% (32–47)",
+    "98.1%",
+    "–"
+   ]
+  ]
+ }
+}

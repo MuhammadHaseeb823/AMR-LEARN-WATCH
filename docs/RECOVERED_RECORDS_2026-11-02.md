@@ -1,0 +1,13 @@
+# Records recovered on 2 November 2026
+
+Source: output of search cells run by the authors in Colab (Haseeb's Drive: 25 notebooks, 194 result files) and scripts read from amr_training_toolkit.zip.
+
+- Training script (now in paper1_classifier/scripts/05_image_finetune.py): torchvision ResNet-18 with ResNet18_Weights.DEFAULT, new 19-way output layer, AdamW lr 3e-4, batch 32, default 8 epochs, default seed 0 (random, numpy and torch), flips and ColorJitter(0.1,0.1) in training, checkpoint with best validation accuracy, whole groups held out; five-fold folds use a fixed order (Random(12345)) with round-robin assignment of each class's groups.
+- Staging script (paper1_classifier/scripts/22_stage_kacst.py) and its manifest (results/kacst_staging_manifest.csv; 758 rows = 757 E. coli / K. pneumoniae photographs from 278 plates plus 1 S. aureus photograph): up to 3 photographs per plate chosen at random (seed 12345), at most 150 per species x agar x condition, exact duplicates removed by MD5, longer side at most 640 px, JPEG quality 92.
+- Notebooks of 21 October onwards (AMR_LATEST_all_steps*.ipynb) call the cross-validation with --epochs 8 --size 224 --stratify-groups. The 72.2% run's result files date from 2026-10-21 02:30-04:13 (about 25 minutes per fold, consistent with a CPU run); the notebook was saved after the run (2026-10-21 22:57), so the epochs are indicative, not proven. Seed is not shown in the notebook text; the script default is 0.
+- GPU main run: result folders dated 2026-10-22 08:41-08:45.
+- A notebook AMR_image_notebook_v2 (2026-10-31) has SEED=42, 20 epochs, lr 0.0003, batch 32; it is a separate generic notebook and was not used for the paper's results.
+- Software versions re-checked on 2026-11-02 in a new CPU session: torch 2.11.0+cpu, torchvision 0.26.0+cpu, Python 3.13.18 (may differ from the original session).
+- ARMD cleaning counts reproduced 2026-11-02 (Paper 2, Table 2): 2,241,050 rows; 634,468 Null; 18,090 conflicting; 47,254 non-resistant/susceptible (43,911 intermediate, 1,932 synergism, 1,411 inconclusive); 1,541,238 left (16.78% resistant).
+- Not found in Haseeb's Drive: the GEE analysis for Paper 2 (to be searched in the second Drive).
+- GEE (Paper 2): original code not found. Re-fit on 2026-11-02 (scripts/gee_refit_exact_colab.py; statsmodels 0.15.0; independence working correlation, robust SE clustered by patient, calendar year, Feb 2008-Dec 2023, 282,904 tests): cipro 1.0058 (0.9990-1.0127), gent 0.9995 (0.9904-1.0087), amp 0.9928 (0.9881-0.9976), nitro 0.9384 (0.9184-0.9589), TMP-SMX 0.9822 (0.9769-0.9875); within 0.0003 of the reported Table 4. Exchangeable did not reproduce it.

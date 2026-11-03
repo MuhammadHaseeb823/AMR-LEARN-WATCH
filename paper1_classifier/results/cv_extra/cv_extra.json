@@ -1,0 +1,44 @@
+{
+ "target_accuracy_when_answered": 0.9,
+ "thresholds_chosen_per_fold": [
+  0.9,
+  0.97,
+  0.97,
+  0.98,
+  0.92
+ ],
+ "nested_coverage": 0.394,
+ "nested_coverage_ci95": [
+  0.321,
+  0.475
+ ],
+ "nested_accuracy_when_answered": 0.874,
+ "nested_accuracy_ci95": [
+  0.767,
+  0.949
+ ],
+ "agar": {
+  "photographs": 950,
+  "errors": 230,
+  "errors_on_same_agar": 229,
+  "agar_of_prediction_correct": 0.999,
+  "MAC": {
+   "photographs": 350,
+   "species": 7,
+   "accuracy": 0.763,
+   "chance": 0.143
+  },
+  "BAP": {
+   "photographs": 550,
+   "species": 11,
+   "accuracy": 0.735,
+   "chance": 0.091
+  },
+  "SS": {
+   "photographs": 50,
+   "species": 1,
+   "accuracy": 0.98,
+   "chance": 1.0
+  }
+ }
+}
