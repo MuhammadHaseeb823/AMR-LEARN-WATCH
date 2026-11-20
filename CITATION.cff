@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "AMR-LEARN and AMR-WATCH: offline teaching applications for colony-image interpretation and antimicrobial-resistance trend detection"
+type: software
+license: MIT
+version: 1.0.1
+authors:
+  - given-names: "Muhammad Haseeb"
+    family-names: "Tariq"
+    email: "muhammadhaseebtariq19@gmail.com"
+    orcid: "https://orcid.org/0000-0002-4767-5430"
+    affiliation: "Department of Biochemistry, Mid Yorkshire Hospitals NHS Trust, Wakefield, United Kingdom"
+  - given-names: "Claire"
+    family-names: "Price"
+    affiliation: "Institute of Life Science, Swansea University Medical School, Swansea, United Kingdom"
+  - given-names: "Mariam"
+    family-names: "Ammoun"
+    affiliation: "Department of Blood Transfusion, Royal Marsden NHS Foundation Trust, London, United Kingdom"
+  - given-names: "Afreenish"
+    family-names: "Amir"
+    affiliation: "Department of Microbiology, National Institutes of Health, Islamabad, Pakistan"
+  - given-names: "Muhammad Muneeb"
+    family-names: "Tariq"
+    affiliation: "Department of Computer Sciences, Quaid-i-Azam University, Islamabad, Pakistan"
+abstract: "Research and teaching use only. Two single-file offline browser applications with the version 1.0 interface: AMR-LEARN (a colony-image teaching tool with a ResNet-18 research model trained on the Jilin colony-image set) and AMR-WATCH (a surveillance teaching tool on synthetic data). Detector, rule and model code is unchanged from the validated builds (AMR-LEARN 0.21.0, AMR-WATCH 0.23.0). The frozen validation package and the scripts and result files behind the two papers are in Zenodo release v1.0.0 (10.5281/zenodo.23926262). No patient data. Not for clinical use."
+keywords:
+  - antimicrobial resistance
+  - colony images
+  - surveillance
+  - teaching
